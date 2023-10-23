@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { toggleActions } from "./toggleSlice"
 
 const initialState = {counterValue: 0}
 
@@ -26,6 +27,11 @@ const counterSlice = createSlice({
         },
         decrement: (state, action) => {
             state.counterValue -= action.payload
+        }
+    },
+    extraReducers: {
+        [toggleActions.toggleFn] : (state, action) => {
+            state.counterValue = action.payload
         }
     }
 })

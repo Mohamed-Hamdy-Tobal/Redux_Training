@@ -24,7 +24,6 @@ const Counter = () => {
     }
 
     console.log(`Store => `, store)
-    console.log(`Store Value => `, store.getState().counter)
 
     const CounterHandler = useCallback((type, val) => {
         if (type === 'increment') {
@@ -33,6 +32,16 @@ const Counter = () => {
             dispatch(decrement(val))
         }
     } , [dispatch, increment, decrement]) 
+
+    const toggleHandler = () => {
+        if (globalState.toggleRed.toggle) {
+            console.log("toggle true")
+            dispatch(toggleFn())
+        } else {
+            console.log("toggle False")
+            dispatch(toggleFn(1))
+        }
+    }
     
     useEffect(() => {
         // dispatch(increment(5 - theCounterValue))
@@ -74,7 +83,7 @@ const Counter = () => {
                     </div>
                     </>}
                 </div>
-                <button className="SHBtn" onClick={() => {dispatch(toggleFn())}}>{globalState.toggleRed.toggle? 'LogOut':'Login'}</button>
+                <button className="SHBtn" onClick={() => {toggleHandler()}}>{globalState.toggleRed.toggle ? 'LogOut':'Login'}</button>
             </div>
         </div>
     )
