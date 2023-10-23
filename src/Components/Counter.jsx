@@ -1,4 +1,5 @@
 // import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { counterActions } from "../Store/Reducers/CounterSlice"
 import { toggleActions } from "../Store/Reducers/toggleSlice"
 import store from "../Store/Store"
@@ -24,6 +25,19 @@ const Counter = () => {
 
     console.log(`Store => `, store)
     console.log(`Store Value => `, store.getState().counter)
+
+    const CounterHandler = useCallback((type, val) => {
+        if (type === 'increment') {
+            dispatch(increment(val))
+        } else {
+            dispatch(decrement(val))
+        }
+    } , [dispatch, increment, decrement]) 
+    
+    useEffect(() => {
+        // dispatch(increment(5 - theCounterValue))
+        CounterHandler('increment', 5)
+    },[CounterHandler])
 
 
     // Actions
@@ -55,8 +69,8 @@ const Counter = () => {
                         Counter : <span id="counter">{handleCounterValue(globalState.counterRed.counterValue)}</span>
                     </div>
                     <div className="buttons">
-                        <button className="increase" onClick={() => {dispatch(increment(1))}}>Increase</button>
-                        <button className="decrease" onClick={() => {dispatch(decrement(1))}}>Decrease</button>
+                        <button className="increase" onClick={() => {CounterHandler('increment', 1)}}>Increase</button>
+                        <button className="decrease" onClick={() => {CounterHandler('decrement', 2)}}>Decrease</button>
                     </div>
                     </>}
                 </div>

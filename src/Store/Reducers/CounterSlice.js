@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {counterValue:1}
+const initialState = {counterValue: 0}
 
 // const counterReducer = (state = initialState, action) => {
 //     if (action.type === 'increase') {
